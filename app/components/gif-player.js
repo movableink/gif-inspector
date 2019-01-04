@@ -14,6 +14,9 @@ export default Component.extend({
       this.frameNumber = 0;
     }
 
+    this.currentFrame = this.frameNumber;
+    this.previousFrameInfo = null;
+
     this.draw();
   },
 
@@ -25,22 +28,33 @@ export default Component.extend({
     const { reader, image, context } = this;
     const { width, height } = image;
 
-    const frameNum = ++this.frameNumber % reader.numFrames();
-    const frameInfo = reader.frameInfo(frameNum);
+    const frameInfo = reader.frameInfo(this.currentFrame);
 
-    if (frameNum === 0 || frameInfo.disposal === 2 /* restore to bg */) {
+    if (this.currentFrame === 0) {
+      // always clear canvas to start
       context.clearRect(0, 0, width, height);
+    } else if (this.previousFrameInfo && this.previousFrameInfo.disposal === 2) {
+      // disposal was "restore to background" which is essentially "restore to transparent"
+      context.clearRect(this.previousFrameInfo.x,
+                        this.previousFrameInfo.y,
+                        this.previousFrameInfo.width,
+                        this.previousFrameInfo.height);
     }
 
+    // draw frame on top of existing canvas data
     const imageData = context.getImageData(0, 0, width, height);
-    reader.decodeAndBlitFrameRGBA(frameNum, imageData.data);
+    reader.decodeAndBlitFrameRGBA(this.currentFrame, imageData.data);
     context.putImageData(imageData, 0, 0);
 
     if (this.drawOnce) {
+      // highlight the frame
       context.strokeStyle = '#FF0000';
       context.rect(frameInfo.x, frameInfo.y, frameInfo.width, frameInfo.height);
       context.stroke();
     } else {
+      // get ready to draw next frame
+      this.previousFrameInfo = frameInfo;
+      this.currentFrame = (this.currentFrame + 1) % reader.numFrames();
       const draw = this.draw.bind(this);
       setTimeout(draw, frameInfo.delay * this.speed);
     }

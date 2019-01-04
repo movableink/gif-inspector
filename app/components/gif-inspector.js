@@ -57,6 +57,7 @@ export default Component.extend({
         const file = e.target.files[0];
 
         const array = await readFile(file);
+        set(this, 'blob', window.URL.createObjectURL(file));
         set(this, 'name', file.name);
         this.parseGif(array);
       }

@@ -52,7 +52,7 @@ caption {
   margin-bottom: 10px;
 }
 
-canvas.gif-player {
+canvas.gif-player, img.original {
   border: 1px solid #000;
   background: url('./images/transparency.png') top left;
 }
