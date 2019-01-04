@@ -54,7 +54,7 @@ caption {
 
 canvas.gif-player {
   border: 1px solid #000;
-  background: url('/assets/images/transparency.png') top left;
+  background: url('./images/transparency.png') top left;
 }
 
 .palette-color {
