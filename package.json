@@ -45,7 +45,7 @@
     "ember-welcome-page": "^3.2.0",
     "eslint-plugin-ember": "^5.2.0",
     "loader.js": "^4.7.0",
-    "omggif": "^1.0.9",
+    "omggif": "https://github.com/movableink/omggif.git#17755b1",
     "qunit-dom": "^0.8.0"
   },
   "engines": {
