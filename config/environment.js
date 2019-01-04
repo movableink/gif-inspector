@@ -29,8 +29,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.locationType = 'hash';
-    ENV.rootURL = '/gif-inspector/';
   }
 
   if (environment === 'test') {
@@ -47,6 +45,8 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
+    ENV.locationType = 'hash';
+    ENV.rootURL = '/gif-inspector/';
   }
 
   return ENV;
