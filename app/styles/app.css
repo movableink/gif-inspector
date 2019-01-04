@@ -1,0 +1,67 @@
+html {
+  font-family: sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200,200,200);
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+}
+
+td, th {
+  border: 1px solid rgb(190,190,190);
+  padding: 10px 20px;
+}
+
+th {
+  background-color: rgb(235,235,235);
+}
+
+td {
+  text-align: left;
+}
+
+tr:nth-child(even) td {
+  background-color: rgb(250,250,250);
+}
+
+tr:nth-child(odd) td {
+  background-color: rgb(245,245,245);
+}
+
+caption {
+  padding: 10px;
+}
+
+.frame-info, .gif-info {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.frame-info table, .gif-info table {
+  margin-bottom: 10px;
+}
+
+.frame-info table {
+  width: 350px;
+}
+
+.player {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+canvas.gif-player {
+  border: 1px solid #000;
+  background: url(/images/transparency.png) top left;
+}
+
+.palette-color {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 1px;
+  margin-bottom: 1px;
+  border: 1px solid #000;
+}

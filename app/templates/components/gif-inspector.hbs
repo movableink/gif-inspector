@@ -1,0 +1,85 @@
+<input
+  multiple="true"
+  onchange={{action "processGif"}}
+  accept="image/gif"
+  type="file"
+>
+
+{{#if reader}}
+  <h2>{{name}}</h2>
+
+  <div class="gif">
+    <div class="gif-info">
+      <table>
+        <tbody>
+          <tr>
+            <th>Dimensions</th>
+            <td>{{reader.width}} &times; {{reader.height}}</td>
+          </tr>
+          <tr>
+            <th>Loop Count</th>
+            <td>
+              {{loopCount}}
+
+              {{#if (eq loopCount 0)}}
+                (loop forever)
+              {{/if}}
+
+              {{#if (eq loopCount 1)}}
+                (no looping)
+              {{/if}}
+            </td>
+          </tr>
+          <tr>
+            <th>Data Size</th>
+            <td>{{array.length}}</td>
+          </tr>
+          <tr>
+            <th>Background Color</th>
+            <td>
+              {{#if globalPalette.length}}
+                <span
+                  class="palette-color"
+                  {{! template-lint-disable }}
+                  style={{palette-background backgroundColor}}
+                >
+                </span>
+                {{palette-color backgroundColor}}
+                (index {{reader.background_index}})
+              {{else}}
+                No global background color.
+              {{/if}}
+            </td>
+          </tr>
+          <tr>
+            <th>Palette</th>
+            <td>
+              {{#if globalPalette.length}}
+                {{gif-palette colors=globalPalette}}
+              {{else}}
+                No global palette.
+              {{/if}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="player">
+      {{gif-player reader=reader}}
+      <p>Normal speed</p>
+    </div>
+
+    <div class="player">
+      {{gif-player reader=reader speed=100}}
+      <p>1/10 speed</p>
+    </div>
+  </div>
+
+  {{#each frames as |frame|}}
+    {{gif-frame frame=frame reader=reader}}
+  {{/each}}
+
+{{else}}
+  <p>Select a GIF to inspect it.</p>
+{{/if}}

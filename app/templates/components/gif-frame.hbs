@@ -1,0 +1,54 @@
+<div class="frame">
+  <h3>Frame {{frame.index}}</h3>
+
+  <div class="frame-info">
+    <table>
+      <tbody>
+        <tr>
+          <th>Dimensions</th>
+          <td>{{frame.width}} &times; {{frame.height}}</td>
+        </tr>
+        <tr>
+          <th>Offset</th>
+          <td>x: {{frame.x}}, y: {{frame.y}}</td>
+        </tr>
+        <tr>
+          <th>Disposal</th>
+          <td>{{frame.disposal}} ({{disposalName}})</td>
+        </tr>
+        <tr>
+          <th>Delay</th>
+          <td>{{frame.delay}} ({{frameDelay}}ms)</td>
+        </tr>
+        <tr>
+          <th>Local Palette</th>
+          <td>{{frame.has_local_palette}}</td>
+        </tr>
+        <tr>
+          <th>Data Length</th>
+          <td>{{frame.data_length}}</td>
+        </tr>
+        <tr>
+          <th>Data Offset</th>
+          <td>{{frame.data_offset}}</td>
+        </tr>
+
+        {{#if frame.has_local_palette}}
+          <tr>
+            <th>Palette Size</th>
+            <td>{{frame.palette_size}}</td>
+          </tr>
+        {{/if}}
+      </tbody>
+    </table>
+  </div>
+
+  {{gif-player reader=reader frameNumber=frame.index}}
+
+  {{#if frame.has_local_palette}}
+    <p>
+      Palette:
+      {{gif-palette colors=localPalette}}
+    </p>
+  {{/if}}
+</div>
