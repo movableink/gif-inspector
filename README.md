@@ -49,7 +49,12 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+`gif-inspector` is deployed via Github Pages. You can deploy it like this:
+
+```bash
+ember github-pages:commit
+git push origin gh-pages:gh-pages
+```
 
 ## Further Reading / Useful Links
 
